@@ -1,0 +1,17 @@
+
+.container
+  %h1 Rafter
+
+  .info Click link to copy
+
+  .track-form
+    %input.share-input{ type: 'text', value: @share_url, readonly: true, title: 'Click to copy to clipboard' }
+
+  = link_to "Back", root_path, class: "back-link"
+
+:javascript
+  document.querySelector(".share-input").onclick = function() {
+    this.select();
+    document.execCommand("copy");
+    this.classList.add("copied");
+  }

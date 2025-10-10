@@ -7,6 +7,20 @@ body {
   height: 100vh;
 }
 
+.back-link {
+  display: block;
+  margin-top: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.info {
+  color: #ffffff;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
 .container {
   max-width: min(800px, 80%);
   margin-inline: auto;
@@ -62,6 +76,41 @@ h1 {
   cursor: pointer;
 }
 
+.track-form_share {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: inherit;
+  height: 100%;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.share-input {
+  background-color: #555555;
+  color: #ffffff;
+  border-radius: 10px;
+  height: 100%;
+  padding: 0 20px;
+  font-size: inherit;
+  border: none;
+  position: relative;
+  flex-grow: 1;
+  box-shadow: none;
+
+  /* animate background color to pulse green once */
+  &.copied {
+    animation: pulse-green 0.7s;
+  }
+}
+
+@keyframes pulse-green {
+  0% { background-color: #555555; }
+  50% { background-color: #22bb22; }
+  100% { background-color: #555555; }
+}
+
 @media only screen and (max-width: 768px) {
   .track-form {
     flex-wrap: wrap;
@@ -72,7 +121,8 @@ h1 {
     width: 100%;
   }
 
-  .track-form_paste, .track-form_submit {
+  .track-form_paste,
+  .track-form_submit {
     flex-grow: 1;
   }
 }
