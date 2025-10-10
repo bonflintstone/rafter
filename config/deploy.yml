@@ -1,0 +1,30 @@
+<% require "rails"; require "dotenv-rails"; Dotenv::Rails.load %>
+
+service: rafter
+
+image: bonflintstone/rafter
+
+servers:
+  web:
+    - rafter.bonflintstone.com
+
+proxy:
+  ssl: true
+  host: rafter.bonflintstone.com
+
+registry:
+  username: bonflintstone
+  password: <%= ENV["DOCKER_REGISTRY_PASSWORD"] %>
+
+env:
+  spotify_client_id: <%= ENV["SPOTIFY_CLIENT_ID"] %>
+  spotify_client_secret: <%= ENV["SPOTIFY_CLIENT_SECRET"] %>
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
+builder:
+  arch: amd64

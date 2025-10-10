@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "faraday"
 gem "haml"
+gem "kamal", require: false
 gem "oauth2"
 gem "propshaft"
 gem "puma", ">= 5.0"
