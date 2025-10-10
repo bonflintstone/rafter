@@ -17,8 +17,9 @@ registry:
   password: <%= ENV["DOCKER_REGISTRY_PASSWORD"] %>
 
 env:
-  spotify_client_id: <%= ENV["SPOTIFY_CLIENT_ID"] %>
-  spotify_client_secret: <%= ENV["SPOTIFY_CLIENT_SECRET"] %>
+  SPOTIFY_CLIENT_ID: <%= ENV["SPOTIFY_CLIENT_ID"] %>
+  SPOTIFY_CLIENT_SECRET: <%= ENV["SPOTIFY_CLIENT_SECRET"] %>
+  SECRET_KEY_BASE: <%= ENV["SECRET_KEY_BASE"] %>
 
 aliases:
   console: app exec --interactive --reuse "bin/rails console"
