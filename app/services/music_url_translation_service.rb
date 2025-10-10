@@ -5,7 +5,7 @@ class MusicUrlTranslationService
 
   def initialize; end
 
-  def call(target: nil, url:)
+  def call(url:, target: nil)
     source = SUPPORTED_PLATFORMS.find { url.include?(_1) }
     target ||= (SUPPORTED_PLATFORMS - [source]).first
 

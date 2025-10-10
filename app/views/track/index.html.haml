@@ -1,6 +1,8 @@
 .container
   %h1 Rafter
 
+  - if @error
+    .error= @error
   = form_with url: root_path, method: :get, class: 'track-form' do |form|
     = form.text_field :url, placeholder: "Enter track url", required: true, class: 'track-form_input'
     = form.submit "Paste and Raft!", class: 'track-form_submit', type: 'button'

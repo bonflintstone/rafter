@@ -30,7 +30,7 @@ class DeezerApiService
     end
     body = JSON.parse(response.body, symbolize_names: true)
 
-    track_url = body[:data].find { it[:type] == 'track' }&.then { it[:link] }
+    track_url = body[:data].find { _1[:type] == 'track' }&.then { _1[:link] }
 
     raise "Track not found" unless track_url
 
