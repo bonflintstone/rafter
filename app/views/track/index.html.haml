@@ -1,0 +1,29 @@
+.container
+  %h1 Rafter
+
+  = form_with url: root_path, method: :get, class: 'track-form' do |form|
+    = form.text_field :url, placeholder: "Enter track url", required: true, class: 'track-form_input'
+    = form.submit "Paste and Raft!", class: 'track-form_submit', type: 'button'
+
+:javascript
+  document.addEventListener("DOMContentLoaded", function() {
+    const pasteButton = document.querySelector(".track-form_submit");
+    const urlInput = document.querySelector(".track-form_input");
+
+    pasteButton.addEventListener("click", async () => {
+      if (urlInput.value.trim() == "") {
+        urlInput.value = await navigator.clipboard.readText();
+      }
+
+      return urlInput.form.submit()
+    });
+
+    urlInput.addEventListener("keydown", () => {
+      console.log(urlInput.value)
+      if (urlInput.value.trim() == "") {
+        pasteButton.value = "Paste and Raft!";
+      } else {
+        pasteButton.value = "Raft!";
+      }
+    })
+  });
