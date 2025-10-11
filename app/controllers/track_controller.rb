@@ -19,6 +19,10 @@ class TrackController < ApplicationController
   rescue StandardError => e
     @error = e.message
     @url = params[:url]
-    render :index
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: { error: @error, url: @url } }
+    end
   end
 end
