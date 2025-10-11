@@ -13,6 +13,9 @@ class TrackController < ApplicationController
     return redirect_to root_path unless params[:url].present?
 
     @share_url = MusicUrlTranslationService.call(url: params[:url])
+  rescue StandardError => e
+    @error = e.message
+    @url = params[:url]
+    render :index
   end
 end
-

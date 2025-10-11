@@ -6,7 +6,8 @@ class DeezerApiService
   def initialize; end
 
   def get_track_data(track_url)
-    track_id = track_url.split("/").last.split("?").first
+    track_url = resolve_share_link(track_url) if track_url.include?("link.deezer.com")
+    track_id =  track_url.split("/").last.split("?").first
 
     response = Faraday.get("https://api.deezer.com/track/#{track_id}")
     body = JSON.parse(response.body, symbolize_names: true)
@@ -35,5 +36,16 @@ class DeezerApiService
     raise "Track not found" unless track_url
 
     track_url
+  end
+
+  private
+
+  def resolve_share_link(url)
+    response = Faraday.get(url)
+    location = response.headers["location"]
+    query = URI.parse(location).query
+    Rack::Utils.parse_query(query)["dest"]
+  rescue StandardError
+    raise "Could not resolve share link"
   end
 end
