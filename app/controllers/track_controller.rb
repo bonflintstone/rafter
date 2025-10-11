@@ -12,7 +12,10 @@ class TrackController < ApplicationController
   def share
     return redirect_to root_path unless params[:url].present?
 
-    @share_url = MusicUrlTranslationService.call(url: params[:url])
+    respond_to do |format|
+      format.html { @share_url = MusicUrlTranslationService.call(url: params[:url]) }
+      format.json { render json: { url: MusicUrlTranslationService.call(url: params[:url]) } }
+    end
   rescue StandardError => e
     @error = e.message
     @url = params[:url]
